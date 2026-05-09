@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subscriptions</title>
+    <style>
+        body { background:#111827; color:white; font-family:Arial; }
+        .card {
+            background:#312e81;
+            padding:15px;
+            margin:10px;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>💳 Membership Plans</h1>
+
+{% for a in abonnements %}
+    <div class="card">
+        <h3>{{ a.type }}</h3>
+        <p>Price: {{ a.prix }} DH</p>
+        <p>From: {{ a.dateDebut|date('Y-m-d') }}</p>
+        <p>To: {{ a.dateFin|date('Y-m-d') }}</p>
+    </div>
+{% endfor %}
+
+</body>
+</html>

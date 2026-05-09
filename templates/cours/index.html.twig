@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h2>Planning des Cours</h2>
+
+<table class="table table-striped">
+<tr>
+<th>Nom</th>
+<th>Date</th>
+<th>Coach</th>
+</tr>
+
+{% for cour in cours %}
+<tr>
+<td>{{ cour.nom }}</td>
+<td>{{ cour.dateCours|date('d/m/Y H:i') }}</td>
+<td>{{ cour.coach }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,261 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fitness Club{% endblock %}
+
+{% block body %}
+
+<style>
+    body{
+        background:#0f172a;
+        color:white;
+        font-family: Arial, sans-serif;
+    }
+
+    .navbar{
+        background: rgba(0,0,0,0.8) !important;
+        backdrop-filter: blur(10px);
+    }
+
+    .hero{
+        height:90vh;
+        background:
+            linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)),
+            url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop');
+        background-size:cover;
+        background-position:center;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:70px;
+        font-weight:bold;
+    }
+
+    .hero p{
+        font-size:22px;
+        color:#cbd5e1;
+    }
+
+    .btn-custom{
+        padding:12px 30px;
+        border-radius:30px;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .btn-login{
+        background:#7c3aed;
+        color:white;
+    }
+
+    .btn-login:hover{
+        background:#6d28d9;
+        transform:translateY(-2px);
+    }
+
+    .btn-register{
+        background:#06b6d4;
+        color:white;
+    }
+
+    .btn-register:hover{
+        background:#0891b2;
+        transform:translateY(-2px);
+    }
+
+    .section-title{
+        font-size:40px;
+        font-weight:bold;
+        margin-bottom:40px;
+    }
+
+    .card-custom{
+        background:#1e293b;
+        border:none;
+        border-radius:20px;
+        padding:30px;
+        transition:0.3s;
+        height:100%;
+    }
+
+    .card-custom:hover{
+        transform:translateY(-10px);
+    }
+
+    footer{
+        background:black;
+    }
+
+    .role-badge{
+        background:#7c3aed;
+        padding:8px 16px;
+        border-radius:20px;
+        font-size:14px;
+    }
+</style>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold fs-3" href="{{ path('home') }}">
+            Fitness Club
+        </a>
+
+        <div class="ms-auto d-flex align-items-center gap-3">
+
+            {% if app.user %}
+
+                <span class="role-badge">
+                    Welcome {{ app.user.nom }}
+                </span>
+
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="#" class="btn btn-danger">Manage Users</a>
+                    <a href="#" class="btn btn-warning">Manage Courses</a>
+                    <a href="#" class="btn btn-info">Manage Abonnements</a>
+                {% endif %}
+
+                {% if 'ROLE_RECEPTIONIST' in app.user.roles %}
+                    <a href="#" class="btn btn-info">Members</a>
+                    <a href="#" class="btn btn-warning">Abonnements</a>
+                {% endif %}
+
+                {% if 'ROLE_COACH' in app.user.roles %}
+                    <a href="#" class="btn btn-success">My Courses</a>
+                    <a href="#" class="btn btn-primary">Add Course</a>
+                {% endif %}
+
+                {% if 'ROLE_MEMBER' in app.user.roles %}
+                    <a href="#" class="btn btn-primary">Courses</a>
+                    <a href="#" class="btn btn-info">Coaches</a>
+                {% endif %}
+
+                <a href="{{ path('app_logout') }}" class="btn btn-light">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{{ path('app_login') }}" class="btn btn-custom btn-login">
+                    Login
+                </a>
+
+                <a href="{{ path('app_register') }}" class="btn btn-custom btn-register">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="container">
+
+        <h1>WELCOME TO FITNESS CLUB</h1>
+
+        <p class="mt-4">
+            Transform your body. Transform your life.
+        </p>
+
+        <div class="mt-5">
+
+            {% if not app.user %}
+
+                <a href="{{ path('app_register') }}"
+                   class="btn btn-custom btn-register me-3">
+                    Join Now
+                </a>
+
+                <a href="{{ path('app_login') }}"
+                   class="btn btn-custom btn-login">
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+<section class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center section-title">
+            OUR SERVICES
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card-custom text-center">
+                    <h3>Yoga</h3>
+                    <p class="mt-3">
+                        Relax your mind and body with professional yoga sessions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-custom text-center">
+                    <h3>Musculation</h3>
+                    <p class="mt-3">
+                        Build strength and achieve your dream physique.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-custom text-center">
+                    <h3>Cardio</h3>
+                    <p class="mt-3">
+                        Improve endurance and overall health.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="py-5">
+
+    <div class="container text-center">
+
+        <h2 class="section-title">
+            ABOUT US
+        </h2>
+
+        <p class="fs-5 text-light">
+            We are a modern fitness club helping people achieve their goals
+            through coaching, discipline and motivation.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-4">
+
+    <p class="mb-0">
+        © 2026 Fitness Club — All rights reserved
+    </p>
+
+</footer>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <style>
+        body { background:#0b1220; color:white; font-family:Arial; }
+        .box {
+            background:#2563eb;
+            padding:20px;
+            border-radius:10px;
+            width:300px;
+            margin:auto;
+            margin-top:100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>👤 My Profile</h2>
+    <p>Name: {{ user.nom }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Roles: {{ user.roles|join(', ') }}</p>
+</div>
+
+</body>
+</html>
